@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', 'HomeController@loginView');
+Route::get('home', 'HomeController@homeView');
+Route::post('login', 'HomeController@login');
+Route::get('logout', 'HomeController@logout');
+Route::get('validar-acceso', 'HomeController@validarAcceso');
+Route::get('crear-usuario', 'HomeController@crearUsuario');
+Route::post('store-usuario', 'HomeController@storeUsuario');
+Route::post('cambiar-password', 'HomeController@cambiarPassword');
