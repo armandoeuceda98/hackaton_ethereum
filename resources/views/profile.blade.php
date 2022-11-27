@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <title>Perfil | {{$datos['usuario']->nickname}}</title>
 </head>
-<body style="background: #bbb;">
-    <nav class="navbar navbar-default">
+<body style="background-color: rgb(97, 150, 200">
+    <nav class="navbar navbar-default" style="background: rgb(90, 97, 195);color: white">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand active" href="{{url('home')}}">NFT Gallery</a>
+                <a class="navbar-brand active" style="color: white" href="{{url('home')}}">NFT Gallery</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                 </ul>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
-                    <p class="text-right" ><a href="{{url('feeduser')}}/{{Session::get('id')}}">{{Session::get('usuario')}}</a></p>
+                <p class="text-right"  ><a style="color: white" href="{{url('feeduser')}}/{{Session::get('id')}}">{{Session::get('usuario')}}</a></p>
                     <p class="text-right" ><a style="color:grey" href="{{url('logout')}}">Cerrar Sesión</a></p>
                 </div>
             </div>
@@ -43,14 +43,16 @@
         <div class="row">
             <div class="col-lg-2">
             </div>
-            <div class="col-lg-8 text-center" style="background-color:white">
-                <h2>Publicaciones</h2>
+            <div class="col-lg-8 text-left" style="background-color:white">
+                <h2>Bio</h2>
+                <p>{{$datos['usuario']->descripcion}}</p>
                 @if($datos['usuario']->nickname == Session::get('usuario'))
                     <div>
-                        <h3>Publicar</h3>
-                        <button type="button" id="btnNuevaPublicacion" class="btn" data-toggle="modal" data-target="#mdlNuevo">Nueva Publicación</button>
+                        <h3 style="color: ">Publicar</h3>
+                        <button type="button" id="btnNuevaPublicacion" class="btn" style="background: rgb(90, 97, 195);color: white" data-toggle="modal" data-target="#mdlNuevo">Nueva Publicación</button>
                     </div>
                 @endif
+                <h2>Publicaciones</h2>
                 <br>
             </div>
             <div class="col-lg-2">

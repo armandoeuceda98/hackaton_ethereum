@@ -11,17 +11,17 @@
 <style>
 
 </style>
-<body style="background-color:#bbb">
-    <nav class="navbar navbar-default">
+<body style="background-color: rgb(97, 150, 200">
+    <nav class="navbar navbar-default" style="background: rgb(90, 97, 195);color: white">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand active" href="{{url('home')}}">NFT Gallery</a>
+                <a class="navbar-brand active" style="color: white" href="{{url('home')}}">NFT Gallery</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                 </ul>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
-                    <p class="text-right" ><a href="{{url('feeduser')}}/{{Session::get('id')}}">{{Session::get('usuario')}}</a></p>
+                    <p class="text-right"  ><a style="color: white" href="{{url('feeduser')}}/{{Session::get('id')}}">{{Session::get('usuario')}}</a></p>
                     <p class="text-right" ><a style="color:grey" href="{{url('logout')}}">Cerrar Sesión</a></p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-lg-8 text-center" style="background-color:white">
                 <h2>Publicaciones</h2>
-                <p>Los NFT mas curseados que vas a hallar.</p>
+                <p>Los NFT mas curseados que vas a encontrar.</p>
             </div>
             <div class="col-lg-2">
 
