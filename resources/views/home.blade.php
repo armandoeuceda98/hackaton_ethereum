@@ -34,6 +34,7 @@
             </div>
             <div class="col-lg-8 text-center" style="background-color:white">
                 <h2>Publicaciones</h2>
+                <p>Los NFT mas curseados que vas a hallar.</p>
             </div>
             <div class="col-lg-2">
 
@@ -63,7 +64,7 @@
                                 </div>
                             </div>
                             <br>
-                            <p>Autor: {{$publicacion->nickname}}</p>
+                            <a href="{{url('feeduser')}}/{{$publicacion->FkUsuario}}">Autor: {{$publicacion->nickname}}</a>
                         </div>
                     </div>                    
                     
