@@ -14,21 +14,10 @@ use App\PublicacionesUsuario;
 class HomeController extends Controller
 {
 
-    public function usuarios(){
-        $usuario = Session::get('usuario');
-
-        $usuarios = Usuarios::all();
-        if ($usuario != $usuarios[0]->usuario){
-            return view('acceso_denegado');
-        }
-
-        return $usuarios;
-    }
-
     public function feed() {
         if (is_null(Session::get('usuario'))) {
 
-            return view('login');
+            return redirect('/');
         }
 
         $publicaciones = Publicaciones::orderBy('created_at', 'desc')->take(10)->get();
@@ -47,10 +36,11 @@ class HomeController extends Controller
     public function feedUser($usuario) {
         if (is_null(Session::get('usuario'))) {
 
-            return view('login');
+            return redirect('/');
         }
 
         $publicaciones = Publicaciones::where('FkUsuario', $usuario)->orderBy('created_at', 'desc')->get();
+        $perfilUsuario = Usuarios::find($usuario);
 
         foreach ($publicaciones as $publicacion) {
             $usuario = Usuarios::find($publicacion->FkUsuario);
@@ -58,17 +48,30 @@ class HomeController extends Controller
         }
 
         $datos['publicaciones'] = $publicaciones;
+        $datos['usuario'] = $perfilUsuario;
 
         return view('profile', ['datos'=>$datos]);
     }
 
-    public function homeView() {
+    public function storePublicacion(Request $request) {
         if (is_null(Session::get('usuario'))) {
 
-            return view('login');
+            return redirect('/');
         }
 
-        return view('home');
+        $publicacion = new Publicaciones;
+
+        $publicacion->titulo = $request->titulo;
+        $publicacion->descripcion = $request->descrip;
+        $publicacion->enlaceImagen = $request->imagen;
+        $publicacion->enlace = $request->nft;
+        $publicacion->FkUsuario = Session::get('id');
+        $publicacion->created_at = Carbon::now();
+        $publicacion->updated_at = Carbon::now();
+
+        $publicacion->save();
+
+        return redirect('home');
     }
 
     public function registro() {
@@ -85,15 +88,25 @@ class HomeController extends Controller
     public function storeUsuario(Request $request) {
         $usuario = new Usuarios;
 
-        $usuarioIgual = Usuarios::where('usuario', $request->usuario)->first();
+        $usuarioIgual = Usuarios::where('nickname', $request->usuario)->first();
 
         if ($usuarioIgual) {
             return 'El usuario ya existe.';
         }
 
-        $usuario->usuario = $request->usuario;
-        $usuario->contrasena = $request->contrasena;
-        $usuario->descripcion = $request->descrip;
+        $emailIgual = Usuarios::where('email', $request->email)->first();
+
+        if ($emailIgual) {
+            return 'El correo ya está asociado a otra cuenta.';
+        }
+
+        $usuario->nickname = $request->usuario;
+        $usuario->password = $request->contra;
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->email = $request->email;
+        $usuario->created_at = Carbon::now();
+        $usuario->updated_at = Carbon::now();
         $usuario->save();
 
         return 'Usuario creado con éxito.';
@@ -120,7 +133,7 @@ class HomeController extends Controller
         if (Session::get('usuario')) {
             return 1;
         } else {
-            return view('login');
+            return redirect('/');
         }
     }
 
@@ -148,6 +161,7 @@ class HomeController extends Controller
         $logeo = Usuarios::where('nickname', $usuario)->where('password', $clave)->first();
         if($logeo) {
             Session::put('usuario', $logeo->nickname);
+            Session::put('id', $logeo->PkUsuario);
             return 1;
         } else {
             return 2;

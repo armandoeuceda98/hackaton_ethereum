@@ -13,11 +13,10 @@
 
 
 Route::get('/', 'HomeController@loginView');
-Route::get('home', 'HomeController@homeView');
-Route::get('feed', 'HomeController@feed');
+Route::get('home', 'HomeController@feed');
+Route::get('feeduser/{PkUsuario}', 'HomeController@feedUser');
 Route::post('login', 'HomeController@login');
+Route::post('store-publicacion', 'HomeController@storePublicacion');
 Route::get('logout', 'HomeController@logout');
 Route::get('validar-acceso', 'HomeController@validarAcceso');
-Route::get('crear-usuario', 'HomeController@crearUsuario');
 Route::post('store-usuario', 'HomeController@storeUsuario');
-Route::post('cambiar-password', 'HomeController@cambiarPassword');

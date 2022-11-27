@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
-    <title>Home | NFT Gallery</title>
+    <title>Perfil | {{$datos['usuario']->nickname}}</title>
 </head>
-<style>
-
-</style>
-<body style="background-color:#bbb">
+<body style="background: #bbb;">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -27,13 +24,34 @@
             </div>
         </div>
     </nav>
-    
     <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-8 text-left" style="background-color:white">
+                <h2>{{$datos['usuario']->nickname}}</h2>
+                <p>{{$datos['usuario']->nombre}} {{$datos['usuario']->apellido}}</p>
+                <p>{{$datos['usuario']->email}}</p>
+                <br>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <br>
+        
         <div class="row">
             <div class="col-lg-2">
             </div>
             <div class="col-lg-8 text-center" style="background-color:white">
                 <h2>Publicaciones</h2>
+                @if($datos['usuario']->nickname == Session::get('usuario'))
+                    <div>
+                        <h3>Publicar</h3>
+                        <button type="button" id="btnNuevaPublicacion" class="btn" data-toggle="modal" data-target="#mdlNuevo">Nueva Publicación</button>
+                    </div>
+                @endif
+                <br>
             </div>
             <div class="col-lg-2">
 
@@ -56,7 +74,7 @@
     
                                     <img src="{{$publicacion->enlaceImagen}}" height="100" width="100" alt=""> 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
     
                                     <p>{{$publicacion->descripcion}}</p>
                                     <a href="{{$publicacion->enlace}}">Enlace NFT</a>
@@ -74,6 +92,42 @@
             </div>
         </div>
     </div>
+
+<div class="modal fade" id="mdlNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Publicación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{url('store-publicacion')}}" method="POST" id="frmNuevo">
+          <div class="modal-body">
+              <div id="" class="form-group">
+                  <label for="">Título</label>
+                  <input type="text" name="titulo" class="form-control" id="txtTitulo" placeholder="NTF">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Descripción</label>
+                  <input type="text" name="descrip" class="form-control" id="txtDescripN" placeholder="Descripción">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Enlace de Imagen</label>
+                  <input type="text" name="imagen" class="form-control" id="txtImagen" placeholder="imagen.com/imagen123">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Enlace de NFT</label>
+                  <input type="text" name="nft" class="form-control" id="txtNFT" placeholder="ntf.com/nft123">
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" id="btnGuardarNuevo" class="btn" style="background: rgb(90, 97, 195);color: white">Guardar</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 </body>
 <script src="{{ asset('js/jquery.min.js') }}"></script>

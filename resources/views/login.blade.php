@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
     <title>Login | NFT Gallery</title>
 
     <style>
@@ -115,9 +117,51 @@
             <input type="password" id="password" name="password" placeholder="Contraseña"/>
             <label id="alerta" class="invalid-feedback"></label>
             <button id="logear" type="button">Iniciar Sesión</button>
+            <p>ó</p>
+            <button type="button" id="btnNuevoUsuario" class="btn" data-toggle="modal" data-target="#mdlNuevo">Registrarse</button>
         </form>
     </div>
     </div>
+
+<div class="modal fade" id="mdlNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST" id="frmNuevo">
+          <div class="modal-body">
+              <div id="" class="form-group">
+                  <label for="">Nickname</label>
+                  <input type="text" name="usuario" class="form-control" id="usuario" placeholder="usuario123">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Contraseña</label>
+                  <input type="password" name="contra" class="form-control" id="txtContra" placeholder="**********">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Nombre</label>
+                  <input type="text" name="nombre" class="form-control" id="txtNombre" placeholder="Eiken">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Apellido</label>
+                  <input type="text" name="apellido" class="form-control" id="txtApellido" placeholder="Ortega">
+              </div>
+              <div id="" class="form-group">
+                  <label for="">Email</label>
+                  <input type="email" name="email" class="form-control" id="txtEmail" placeholder="mail@email.com">
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" id="btnGuardarNuevo" class="btn" style="background: rgb(90, 97, 195);color: white">Guardar</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/login.js') }}"></script>

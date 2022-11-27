@@ -11,5 +11,15 @@ $('#logear').on('click', function(){
             $('#alerta').text('Usuario o contraseña incorrecto.');
         }
     });
+});
 
+$('#btnGuardarNuevo').on('click', function(){
+
+    let url = "store-usuario"
+    var data = $('#frmNuevo').serialize();
+    $.post(url, data).done(function(resp) {
+        console.log(resp);
+        alert(resp);
+        location.reload();
+    });
 });
