@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
 use App\Usuarios;
+use App\Publicaciones;
+use App\PublicacionesUsuario;
 
 class HomeController extends Controller
 {
@@ -29,7 +31,35 @@ class HomeController extends Controller
             return view('login');
         }
 
+        $publicaciones = Publicaciones::orderBy('created_at', 'desc')->take(10)->get();
+
+        foreach ($publicaciones as $publicacion) {
+            $usuario = Usuarios::find($publicacion->FkUsuario);
+            $publicacion['nickname'] = $usuario->nickname;
+        }
+
+        $datos['publicaciones'] = $publicaciones;
         
+
+        return view('home', ['datos'=>$datos]);
+    }
+
+    public function feedUser($usuario) {
+        if (is_null(Session::get('usuario'))) {
+
+            return view('login');
+        }
+
+        $publicaciones = Publicaciones::where('FkUsuario', $usuario)->orderBy('created_at', 'desc')->get();
+
+        foreach ($publicaciones as $publicacion) {
+            $usuario = Usuarios::find($publicacion->FkUsuario);
+            $publicacion['nickname'] = $usuario->nickname;
+        }
+
+        $datos['publicaciones'] = $publicaciones;
+
+        return view('profile', ['datos'=>$datos]);
     }
 
     public function homeView() {

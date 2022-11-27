@@ -14,6 +14,7 @@
 
 Route::get('/', 'HomeController@loginView');
 Route::get('home', 'HomeController@homeView');
+Route::get('feed', 'HomeController@feed');
 Route::post('login', 'HomeController@login');
 Route::get('logout', 'HomeController@logout');
 Route::get('validar-acceso', 'HomeController@validarAcceso');

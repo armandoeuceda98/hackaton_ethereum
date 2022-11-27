@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usuarios extends Model
+class Publicaciones extends Model
 {
     protected $connection = 'mysql';
     
